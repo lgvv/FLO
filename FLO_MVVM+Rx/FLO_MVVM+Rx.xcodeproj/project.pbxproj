@@ -14,6 +14,10 @@
 		B175398527C8A78E00D51B9F /* FLO_MVVM_RxTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B175398427C8A78E00D51B9F /* FLO_MVVM_RxTests.swift */; };
 		B175398F27C8A78E00D51B9F /* FLO_MVVM_RxUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B175398E27C8A78E00D51B9F /* FLO_MVVM_RxUITests.swift */; };
 		B175399127C8A78E00D51B9F /* FLO_MVVM_RxUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B175399027C8A78E00D51B9F /* FLO_MVVM_RxUITestsLaunchTests.swift */; };
+		B175399F27C8AF3E00D51B9F /* RxCocoa in Frameworks */ = {isa = PBXBuildFile; productRef = B175399E27C8AF3E00D51B9F /* RxCocoa */; };
+		B17539A127C8AF3E00D51B9F /* RxSwift in Frameworks */ = {isa = PBXBuildFile; productRef = B17539A027C8AF3E00D51B9F /* RxSwift */; };
+		B17539A427C8AF4C00D51B9F /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = B17539A327C8AF4C00D51B9F /* SnapKit */; };
+		B17539A727C8AF8200D51B9F /* Then in Frameworks */ = {isa = PBXBuildFile; productRef = B17539A627C8AF8200D51B9F /* Then */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -52,6 +56,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B17539A427C8AF4C00D51B9F /* SnapKit in Frameworks */,
+				B17539A127C8AF3E00D51B9F /* RxSwift in Frameworks */,
+				B175399F27C8AF3E00D51B9F /* RxCocoa in Frameworks */,
+				B17539A727C8AF8200D51B9F /* Then in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -137,6 +145,12 @@
 			dependencies = (
 			);
 			name = "FLO_MVVM+Rx";
+			packageProductDependencies = (
+				B175399E27C8AF3E00D51B9F /* RxCocoa */,
+				B17539A027C8AF3E00D51B9F /* RxSwift */,
+				B17539A327C8AF4C00D51B9F /* SnapKit */,
+				B17539A627C8AF8200D51B9F /* Then */,
+			);
 			productName = "FLO_MVVM+Rx";
 			productReference = B175396A27C8A78C00D51B9F /* FLO_MVVM+Rx.app */;
 			productType = "com.apple.product-type.application";
@@ -209,6 +223,11 @@
 				Base,
 			);
 			mainGroup = B175396127C8A78C00D51B9F;
+			packageReferences = (
+				B175399D27C8AF3E00D51B9F /* XCRemoteSwiftPackageReference "RxSwift" */,
+				B17539A227C8AF4C00D51B9F /* XCRemoteSwiftPackageReference "SnapKit" */,
+				B17539A527C8AF8200D51B9F /* XCRemoteSwiftPackageReference "Then" */,
+			);
 			productRefGroup = B175396B27C8A78C00D51B9F /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -604,6 +623,56 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		B175399D27C8AF3E00D51B9F /* XCRemoteSwiftPackageReference "RxSwift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/ReactiveX/RxSwift";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
+		B17539A227C8AF4C00D51B9F /* XCRemoteSwiftPackageReference "SnapKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SnapKit/SnapKit";
+			requirement = {
+				branch = develop;
+				kind = branch;
+			};
+		};
+		B17539A527C8AF8200D51B9F /* XCRemoteSwiftPackageReference "Then" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/devxoul/Then";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		B175399E27C8AF3E00D51B9F /* RxCocoa */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = B175399D27C8AF3E00D51B9F /* XCRemoteSwiftPackageReference "RxSwift" */;
+			productName = RxCocoa;
+		};
+		B17539A027C8AF3E00D51B9F /* RxSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = B175399D27C8AF3E00D51B9F /* XCRemoteSwiftPackageReference "RxSwift" */;
+			productName = RxSwift;
+		};
+		B17539A327C8AF4C00D51B9F /* SnapKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = B17539A227C8AF4C00D51B9F /* XCRemoteSwiftPackageReference "SnapKit" */;
+			productName = SnapKit;
+		};
+		B17539A627C8AF8200D51B9F /* Then */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = B17539A527C8AF8200D51B9F /* XCRemoteSwiftPackageReference "Then" */;
+			productName = Then;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = B175396227C8A78C00D51B9F /* Project object */;
 }
