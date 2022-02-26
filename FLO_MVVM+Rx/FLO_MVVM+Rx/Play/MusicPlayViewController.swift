@@ -21,8 +21,6 @@ class MusicPlayViewController: UIViewController {
     var musicPlayViewModel = MusicPlayViewModel()
     var musicPlayer = MusicPlayer.shared
     
-    let playerTest = AVPlayer()
-    
     override func loadView() {
         view = musicPlayView
         musicPlayView.commonInit()
@@ -32,15 +30,6 @@ class MusicPlayViewController: UIViewController {
         super.viewDidLoad()
         
         bind(musicPlayViewModel, musicPlayView)
-        
-        let url = "https://grepp-programmers-challenges.s3.ap-northeast-2.amazonaws.com/2020-flo/music.mp3"
-        guard let url = URL(string: url) else {
-            print("🟠 url error")
-            return
-        }
-        let playerItem: AVPlayerItem = AVPlayerItem(url: url)
-        playerTest.replaceCurrentItem(with: playerItem)
-        playerTest.play()
     }
 }
 
