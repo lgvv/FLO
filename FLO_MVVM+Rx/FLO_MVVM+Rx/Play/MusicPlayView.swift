@@ -47,7 +47,7 @@ class MusicPlayView: UIView {
         $0.backgroundColor = .yellow
         $0.numberOfLines = 2
         $0.textAlignment = .center
-        $0.text = "ad\nasdasdasdsdfsdfsf"
+//        $0.text = "ad\nasdasdasdsdfsdfsf"
     }
     
     /// UISlider를 사용한 SeekBar

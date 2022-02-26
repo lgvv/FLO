@@ -12,11 +12,16 @@ import Kingfisher
 import RxCocoa
 import RxSwift
 
+import AVFoundation
+
 class MusicPlayViewController: UIViewController {
     private let disposeBag = DisposeBag()
     
     var musicPlayView = MusicPlayView()
     var musicPlayViewModel = MusicPlayViewModel()
+    var musicPlayer = MusicPlayer.shared
+    
+    let playerTest = AVPlayer()
     
     override func loadView() {
         view = musicPlayView
@@ -27,6 +32,15 @@ class MusicPlayViewController: UIViewController {
         super.viewDidLoad()
         
         bind(musicPlayViewModel, musicPlayView)
+        
+        let url = "https://grepp-programmers-challenges.s3.ap-northeast-2.amazonaws.com/2020-flo/music.mp3"
+        guard let url = URL(string: url) else {
+            print("🟠 url error")
+            return
+        }
+        let playerItem: AVPlayerItem = AVPlayerItem(url: url)
+        playerTest.replaceCurrentItem(with: playerItem)
+        playerTest.play()
     }
 }
 
@@ -34,11 +48,12 @@ extension MusicPlayViewController {
     func bind(_ viewModel: MusicPlayViewModel, _ view: MusicPlayView) {
         
         musicPlayViewModel.musicDriver
-            .drive {
+            .drive { [weak self] in
                 view.titleLabel.text = $0.title
                 view.signerLabel.text = $0.singer
                 view.albumLabel.text = $0.album
                 view.albumImage.kf.setImage(with: $0.imageURL)
+                self?.musicPlayer.initPlayer(url: $0.file)
             }
             .disposed(by: disposeBag)
         
@@ -57,7 +72,10 @@ extension MusicPlayViewController {
                 }
             }
             .debug("🍎")
-            .bind(to: viewModel.buttonStateSubject)
+            .bind { [weak self] in
+                viewModel.buttonStateSubject.onNext($0)
+                self?.musicPlayer.controlPlayer($0)
+            }
             .disposed(by: disposeBag)
         
         viewModel.buttonStateSubject

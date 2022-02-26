@@ -27,6 +27,7 @@ class MusicPlayViewModel {
         
         api.request { music in
             dataResultSubject.onNext(music)
+            print(music)
         }
         
         musicDriver = dataResultSubject
