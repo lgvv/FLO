@@ -28,6 +28,7 @@
 		B1A0403527C9E7A100A5043B /* LyricModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1A0403427C9E7A100A5043B /* LyricModel.swift */; };
 		B1A0403727CA010F00A5043B /* UIButton+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1A0403627CA010F00A5043B /* UIButton+Rx.swift */; };
 		B1A0403B27CA048100A5043B /* MusicPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1A0403A27CA048100A5043B /* MusicPlayer.swift */; };
+		B1A20DC427CC01AD00C9E605 /* UISlider+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1A20DC327CC01AD00C9E605 /* UISlider+Rx.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -64,9 +65,11 @@
 		B17539B227C8C2C000D51B9F /* LyricTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LyricTableViewCell.swift; sourceTree = "<group>"; };
 		B17539B827C8C7C500D51B9F /* Music.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Music.swift; sourceTree = "<group>"; };
 		B17539BB27C8C86400D51B9F /* MusicPlayViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicPlayViewModel.swift; sourceTree = "<group>"; };
+		B19A803827CDF92400A6BB6B /* MyPlayground.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = MyPlayground.playground; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		B1A0403427C9E7A100A5043B /* LyricModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LyricModel.swift; sourceTree = "<group>"; };
 		B1A0403627CA010F00A5043B /* UIButton+Rx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+Rx.swift"; sourceTree = "<group>"; };
 		B1A0403A27CA048100A5043B /* MusicPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicPlayer.swift; sourceTree = "<group>"; };
+		B1A20DC327CC01AD00C9E605 /* UISlider+Rx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UISlider+Rx.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -131,6 +134,7 @@
 				B175397627C8A78D00D51B9F /* Assets.xcassets */,
 				B175397827C8A78D00D51B9F /* LaunchScreen.storyboard */,
 				B175397B27C8A78D00D51B9F /* Info.plist */,
+				B19A803827CDF92400A6BB6B /* MyPlayground.playground */,
 			);
 			path = "FLO_MVVM+Rx";
 			sourceTree = "<group>";
@@ -209,6 +213,7 @@
 			isa = PBXGroup;
 			children = (
 				B1A0403627CA010F00A5043B /* UIButton+Rx.swift */,
+				B1A20DC327CC01AD00C9E605 /* UISlider+Rx.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -368,6 +373,7 @@
 				B17539B927C8C7C500D51B9F /* Music.swift in Sources */,
 				B1A0403B27CA048100A5043B /* MusicPlayer.swift in Sources */,
 				B1A0403527C9E7A100A5043B /* LyricModel.swift in Sources */,
+				B1A20DC427CC01AD00C9E605 /* UISlider+Rx.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
