@@ -32,25 +32,25 @@ class MusicPlayViewModel {
         
         api.request { music in
             dataResultSubject.onNext(music)
-            print(music)
         }
         
         initMusicInfoDriver = dataResultSubject
             .asObservable()
             .asDriver(onErrorJustReturn: Music.empty)
         
+        // 현재 player가 play하는 시간(Double type)
+        let currentPlayTime = playerCurrentTimeSubject
+            .asObservable()
+        
         musicPlayDriver = buttonStateSubject
             .asDriver(onErrorJustReturn: .pause)
             
         seekStateDriver = seekStateSubject
             .asObservable()
-            .debug("😦 change seeking state")
             .map { !$0 } // 상태값 반대로 변경
             .asDriver(onErrorJustReturn: false)
         
-        lyricTimeDriver = playerCurrentTimeSubject
-            .asObservable()
-            .debug("😰")
+        lyricTimeDriver = currentPlayTime
             .asDriver(onErrorJustReturn: 0.0)
         
         /// [00:00:000] -> 00:00:000 으로 변환합니다.
@@ -68,18 +68,6 @@ class MusicPlayViewModel {
                 }
                 return result
             }
-            .debug("🤢")
-        
-        /// 초기 상태의 가사
-        let initLyricsLabel = lyricModels
-            .map { lyrics -> [String] in
-                lyrics.map { $0.lyric }
-            }
-            
-        
-        // 현재 player가 play하는 시간(Double type)
-        let currentPlayTime = playerCurrentTimeSubject
-            .asObservable()
         
         let updateLyricsLabel = Observable.combineLatest(lyricModels, currentPlayTime) { lyrics, time -> [LyricModel] in
             /// LyricLabelLines의 값 변수
@@ -109,7 +97,6 @@ class MusicPlayViewModel {
         lyricLabelDriver = Observable.of(lyricModels, updateLyricsLabel)
             .merge()
             .asDriver(onErrorJustReturn: [])
-
     }
 }
 

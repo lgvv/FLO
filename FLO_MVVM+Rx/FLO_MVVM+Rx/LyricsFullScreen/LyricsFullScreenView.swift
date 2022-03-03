@@ -18,13 +18,13 @@ class LyricsFullScreenView: UIView {
     }
     var lyricsTableView = UITableView().then {
         $0.register(LyricTableViewCell.self, forCellReuseIdentifier: LyricTableViewCell.identifier)
-        $0.backgroundColor = .red
         $0.separatorStyle = .none
     }
     
     var seekModeButton = UIButton().then {
         $0.setTitle("SEEK MODE OFF", for: .normal)
-        $0.backgroundColor = .darkGray
+        $0.titleLabel?.font = .systemFont(ofSize: 18, weight: .semibold)
+        $0.setTitleColor(.gray, for: .normal)
     }
 }
 

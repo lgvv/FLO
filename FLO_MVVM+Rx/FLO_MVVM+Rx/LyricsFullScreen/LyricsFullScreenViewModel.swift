@@ -6,16 +6,22 @@
 //
 
 import Foundation
+import CoreMedia
 
 import RxCocoa
 import RxSwift
+
 
 class LyricsFullScreenViewModel {
     
     let musicInfoSubject = PublishSubject<Music>()
     let currentTimeSubject = PublishSubject<Double>()
+    let buttonStateSubject = PublishSubject<ButtonState>()
+    let selectLyricModel = PublishSubject<LyricModel>()
     
     let lyricDriver: Driver<[LyricModel]>
+    let seekButtonDriver: Driver<ButtonState>
+    let musicSyncDriver: Driver<CMTime>
     
     init() {
         let lyricModels = self.musicInfoSubject
@@ -32,29 +38,20 @@ class LyricsFullScreenViewModel {
                 }
                 return result
             }
-        //
+        
         let currentPlayTime = currentTimeSubject.asObservable()
         
-        
-        // 업데이트 레이블 만들어서 하나씩 방출하게 하자.
-        /*
-         내 뒤에가 false이고 나는 true야
-         내 뒤에 시간에 다다르면 나를 false로 내 뒤를 true로
-         
-         */
         let updateLyrics = Observable.combineLatest(lyricModels, currentPlayTime) { lyrics, time -> [LyricModel] in
             
             var result = [LyricModel]()
             
-            // 이분탐색으로 변경 가능.
             for i in 0...lyrics.count-1 {
                 var current = lyrics[i] // current
                 var nextIndex: Int = i+1
                 if i == lyrics.count-1 { // 끝에 도달하면
                     nextIndex = lyrics.count-1
                 }
-                var next = lyrics[nextIndex] // next
-                var last = lyrics[lyrics.count-1]
+                let next = lyrics[nextIndex] // next
                 
                 if current.timeDouble <= time {
                     if next.timeDouble > time {
@@ -64,24 +61,27 @@ class LyricsFullScreenViewModel {
                             current.isHighlight = true
                         }
                     }
-                    
                 } else {
                     current.isHighlight = false
                 }
- 
-                
-                    result.append(current)
-                
-                
+                result.append(current)
             }
-            
             return result
         }
         
         lyricDriver = updateLyrics.asObservable()
-        //            .debug("🤌this is/")
             .asDriver(onErrorJustReturn: [])
         
+        seekButtonDriver = buttonStateSubject
+            .asDriver(onErrorJustReturn: .seekOff)
+        
+        musicSyncDriver = selectLyricModel.asObservable()
+            .map { lyric -> CMTime in
+                let lyricTime = lyric.timeDouble
+                return CMTime(seconds: Double(lyricTime), preferredTimescale: 1000000)
+            }
+            .asDriver(onErrorJustReturn: CMTime.zero)
+            
     }
     
 }

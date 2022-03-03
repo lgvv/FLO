@@ -7,6 +7,7 @@
 
 import UIKit
 
+import Kingfisher
 import RxCocoa
 import RxSwift
 import SnapKit
@@ -14,12 +15,13 @@ import Then
 
 class MusicPlayView: UIView {
     /// 앨범 커버 이미지
-    lazy var albumImage = UIImageView().then {
-        $0.backgroundColor = .blue
+    var albumImage = UIImageView().then {
+        $0.contentMode = .scaleToFill
+        $0.layer.cornerRadius = 12
+        $0.clipsToBounds = true
     }
     /// 아티스트명
     var signerLabel = UILabel().then {
-        $0.backgroundColor = .red
         $0.textAlignment = .center
         $0.font = .systemFont(ofSize: 15, weight: .medium)
         $0.text = "아티스트명"
@@ -27,7 +29,6 @@ class MusicPlayView: UIView {
     }
     /// 앨범명
     var albumLabel = UILabel().then {
-        $0.backgroundColor = .green
         $0.textAlignment = .center
         $0.font = .systemFont(ofSize: 13, weight: .semibold)
         $0.textColor = .darkGray
@@ -36,28 +37,22 @@ class MusicPlayView: UIView {
     }
     /// 곡명
     var titleLabel = UILabel().then {
-        $0.backgroundColor = .cyan
         $0.textAlignment = .center
-        $0.font = .systemFont(ofSize: 20, weight: .bold)
+        $0.font = .systemFont(ofSize: 18, weight: .bold)
         $0.text = "곡명"
     }
     
     /// 가사가 나타날 레이블
     var lyricsLabel = UILabel().then {
-        $0.backgroundColor = .yellow
         $0.numberOfLines = 2
         $0.textAlignment = .center
-//        $0.text = "ad\nasdasdasdsdfsdfsf"
     }
     
     /// UISlider를 사용한 SeekBar
-    var seekBar = UISlider().then {
-        $0.backgroundColor = .red
-    }
+    var seekBar = UISlider()
     
     /// play/stop 버튼
     var playButton = UIButton().then {
-//        $0.backgroundColor = .gray
         $0.setImage(UIImage(named: "ic_play.fill"), for: .normal)
     }
 }
@@ -107,7 +102,7 @@ extension MusicPlayView {
         seekBar.snp.makeConstraints {
             $0.width.equalToSuperview().multipliedBy(0.9)
             $0.centerX.equalToSuperview()
-//            $0.top.greaterThanOrEqualTo(1).priority(.low)
+            //            $0.top.greaterThanOrEqualTo(1).priority(.low)
             $0.bottom.equalToSuperview().offset(-UIScreen.main.bounds.height / 6)
         }
         
@@ -119,7 +114,13 @@ extension MusicPlayView {
     }
 }
 
-public enum ButtonState {
-    case play
-    case pause
+extension MusicPlayView {
+    func setUI(_ data: Music) {
+        titleLabel.text = data.title
+        signerLabel.text = data.singer
+        albumLabel.text = data.album
+        albumImage.kf.setImage(with: data.imageURL)
+        seekBar.maximumValue = Float(Double(data.duration))
+        
+    }
 }

@@ -18,6 +18,7 @@ class LyricTableViewCell: UITableViewCell {
     /// 가사
     var lyricLabel = UILabel().then {
         $0.textAlignment = .center
+        $0.font = UIFont.systemFont(ofSize: 16, weight: .semibold)
     }
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -36,14 +37,19 @@ extension LyricTableViewCell {
     fileprivate func setupViews() {
         [lyricLabel].forEach { addSubview($0) }
         
-        let superViewInset: CGFloat = 8.0
+        let superViewInset: CGFloat = 9.0
         
         lyricLabel.snp.makeConstraints {
             $0.edges.equalToSuperview().inset(superViewInset)
         }
     }
     
-    func setUI() {
-        // TODO: UI구성 여기서 처리
+    func setUI(_ item: LyricModel) {
+        if item.isHighlight == true {
+            lyricLabel.textColor = .black
+        } else {
+            lyricLabel.textColor = .lightGray
+        }
+        lyricLabel.text = item.lyric
     }
 }

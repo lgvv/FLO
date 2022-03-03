@@ -12,7 +12,7 @@ struct LyricModel {
     var lyric: String
     var isHighlight: Bool
     
-    // ex: 01:14:300
+    // format -> 01:14:300
     var timeDouble: Double {
         let timeArray = timeString.components(separatedBy: ":")
         var min: Double = Double(timeArray[0]) ?? 0.0
@@ -20,8 +20,6 @@ struct LyricModel {
         var msec: Double = Double(timeArray[2]) ?? 0.0
         min = min * 60.0
         msec = msec / 1000.0
-        print("😷 timeArray \(timeArray)")
-        print("😷\(min) \(sec) \(msec)")
         return (min + sec + msec)
     }
     

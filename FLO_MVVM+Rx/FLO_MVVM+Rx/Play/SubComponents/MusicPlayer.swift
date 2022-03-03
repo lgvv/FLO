@@ -21,14 +21,10 @@ class MusicPlayer {
         return player.currentItem?.currentTime().seconds ?? 0.0
     }
     /// 현재 아이템의 총 시간 (초)
-    var duration: Double {
-        return player.currentItem?.duration.seconds ?? 0
-    }
+    var duration: Double = 0.0
     
     func initPlayer(url: String) {
-        print("🤐\(url)")
         guard let url = URL(string: url) else {
-            print("🟠 url error")
             return
         }
         let playerItem: AVPlayerItem = AVPlayerItem(url: url)
@@ -37,7 +33,6 @@ class MusicPlayer {
     
     /// play/pause 상태를 확인하는 메소드입니다.
     func controlPlayer(_ state: ButtonState) {
-        print("💡\(state)")
         if state == .play {
             player.play()
         } else {
