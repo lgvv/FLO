@@ -16,13 +16,14 @@ class LyricTableViewCell: UITableViewCell {
     static let identifier = "LyricTableView"
     
     /// 가사
-    var lyricLabel = UILabel()
+    var lyricLabel = UILabel().then {
+        $0.textAlignment = .center
+    }
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
         selectionStyle = .none
-        
         setupViews()
     }
     
@@ -35,7 +36,7 @@ extension LyricTableViewCell {
     fileprivate func setupViews() {
         [lyricLabel].forEach { addSubview($0) }
         
-        let superViewInset: CGFloat = 4.0
+        let superViewInset: CGFloat = 8.0
         
         lyricLabel.snp.makeConstraints {
             $0.edges.equalToSuperview().inset(superViewInset)

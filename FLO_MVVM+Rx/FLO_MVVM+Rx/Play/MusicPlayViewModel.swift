@@ -24,7 +24,7 @@ class MusicPlayViewModel {
     let musicPlayDriver: Driver<ButtonState>
     let seekStateDriver: Driver<Bool>
     let lyricTimeDriver: Driver<Double>
-    let lyricLabelDriver: Driver<[String]>
+    let lyricLabelDriver: Driver<[LyricModel]>
     
     init(api: MusicAPIManager = MusicAPIManager()) {
         
@@ -68,22 +68,25 @@ class MusicPlayViewModel {
                 }
                 return result
             }
+            .debug("🤢")
         
         /// 초기 상태의 가사
         let initLyricsLabel = lyricModels
             .map { lyrics -> [String] in
                 lyrics.map { $0.lyric }
             }
+            
         
         // 현재 player가 play하는 시간(Double type)
-        let lyricTime = playerCurrentTimeSubject
+        let currentPlayTime = playerCurrentTimeSubject
             .asObservable()
         
-        let updateLyricsLabel = Observable.combineLatest(lyricModels, lyricTime) { lyrics, time -> [String] in
+        let updateLyricsLabel = Observable.combineLatest(lyricModels, currentPlayTime) { lyrics, time -> [LyricModel] in
             /// LyricLabelLines의 값 변수
-            let numberOfLyricLabelLines: Int = 2
+            let numberOfLyricLabelLines: Int = 1
             
-            var answer = [String]() // index
+            // 추후에 여러줄을 보여줄 수도 있어서 이렇게 방출
+            var answer = [LyricModel]()
             for index in 1...lyrics.count {
                 var index = index
                 if answer.count >= numberOfLyricLabelLines { break }
@@ -91,24 +94,22 @@ class MusicPlayViewModel {
                 if index >= lyrics.count { index -= 1 }
                 
                 if lyrics[index].timeDouble >= time {
-                    answer.append(lyrics[index-1].lyric)
+                    answer.append(lyrics[index-1])
                 }
             }
             
             // 마지막에 한번 실행되어야 한다.
             if answer.count == 0 {
-                answer.append(lyrics[lyrics.count-2].lyric)
-                answer.append(lyrics[lyrics.count-1].lyric)
+                answer.append(lyrics[lyrics.count-1])
             }
             
             return answer
         }
         
-        lyricLabelDriver = Observable.of(initLyricsLabel, updateLyricsLabel)
+        lyricLabelDriver = Observable.of(lyricModels, updateLyricsLabel)
             .merge()
             .asDriver(onErrorJustReturn: [])
 
-        
     }
 }
 

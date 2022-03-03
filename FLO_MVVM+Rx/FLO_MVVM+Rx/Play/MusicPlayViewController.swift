@@ -10,7 +10,9 @@ import UIKit
 
 import Kingfisher
 import RxCocoa
+import RxGesture
 import RxSwift
+
 
 import AVFoundation
 
@@ -25,6 +27,8 @@ class MusicPlayViewController: UIViewController {
     var timeObserver: Any?
     /// UISlider seeking 여부 - updateTime 메소드 처리
     var isSeeking: Bool = false
+    /// 가사의 클릭시 이동할 뷰 컨트롤러
+    let vc = LyricsFullScreenViewController()
     
     override func loadView() {
         view = musicPlayView
@@ -54,6 +58,10 @@ extension MusicPlayViewController {
                 self?.musicPlayer.initPlayer(url: $0.file)
                 view.seekBar.maximumValue = Float(Double($0.duration))
                 print("✅  seekBar.maximumValue \(view.seekBar.maximumValue)")
+                
+                // TODO: vc로 뮤직 가사 정보 넘겨주자. init
+                self?.vc.viewModel.musicInfoSubject.onNext($0)
+                self?.vc.viewModel.currentTimeSubject.onNext(0)
             }
             .disposed(by: disposeBag)
     
@@ -107,8 +115,19 @@ extension MusicPlayViewController {
         
         viewModel.lyricLabelDriver
             .asObservable()
-            .bind { data in
-                view.lyricsLabel.text = "\(data[0])\n\(data[1])"
+            .bind { [weak self] data in
+                self?.vc.viewModel.currentTimeSubject.onNext(data[0].timeDouble)
+                view.lyricsLabel.text = "\(data[0].lyric)"
+            }
+            .disposed(by: disposeBag)
+        
+        view.lyricsLabel.rx.tapGesture()
+            .when(.recognized)
+            .bind { [weak self] _ in
+                // viewModel로 넘겨줘야 하는 것들은 가사의 현재시간 lyricLabelDriver
+                // 가사, 가사의 현재 플레이시간을 넘겨주어야 한다.
+                // 가사는 initMusicInfoDriver으로 보낸다.
+                self?.present(self!.vc, animated: true)
             }
             .disposed(by: disposeBag)
     }
@@ -126,8 +145,11 @@ extension MusicPlayViewController {
             let currentTime = time.seconds
             musicPlayView.seekBar.value = Float(currentTime)
             print("😵‍💫 \(currentTime)")
-            // viewModel로 현재 시간 전송하는 로직
+            // viewModel로 현재 플레이 되는 시간 전송하는 로직
             self.musicPlayViewModel.playerCurrentTimeSubject.onNext(currentTime)
+            
+            // 전체 가사쪽으로 현재 플레이되는 시간 넘겨주고 거기서 하이라이트 처리하자.
+            vc.viewModel.currentTimeSubject.onNext(currentTime)
         }
     }
 }

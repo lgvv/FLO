@@ -116,8 +116,6 @@ extension MusicPlayView {
             $0.top.equalTo(seekBar.snp.bottom).offset(verticalSpacing * 2)
             $0.width.height.equalTo(30)
         }
-        
-        
     }
 }
 

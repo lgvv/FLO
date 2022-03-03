@@ -10,6 +10,7 @@ import Foundation
 struct LyricModel {
     private var timeString: String
     var lyric: String
+    var isHighlight: Bool
     
     // ex: 01:14:300
     var timeDouble: Double {
@@ -26,9 +27,12 @@ struct LyricModel {
     
     init(
         timeString: String,
-        lyric: String
+        lyric: String,
+        isHighlight: Bool = false
+        
     ) {
         self.timeString = timeString
         self.lyric = lyric
+        self.isHighlight = isHighlight
     }
 }
