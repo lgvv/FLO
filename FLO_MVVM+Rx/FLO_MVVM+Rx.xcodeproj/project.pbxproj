@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B109D06A27D4816D00AD605F /* Demo.mov in Resources */ = {isa = PBXBuildFile; fileRef = B109D06927D4816D00AD605F /* Demo.mov */; };
 		B175396E27C8A78C00D51B9F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B175396D27C8A78C00D51B9F /* AppDelegate.swift */; };
 		B175397727C8A78D00D51B9F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B175397627C8A78D00D51B9F /* Assets.xcassets */; };
 		B175397A27C8A78D00D51B9F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B175397827C8A78D00D51B9F /* LaunchScreen.storyboard */; };
@@ -52,6 +53,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		B109D06927D4816D00AD605F /* Demo.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = Demo.mov; sourceTree = "<group>"; };
 		B175396A27C8A78C00D51B9F /* FLO_MVVM+Rx.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "FLO_MVVM+Rx.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B175396D27C8A78C00D51B9F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B175397627C8A78D00D51B9F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -139,6 +141,7 @@
 				B17539A827C8B2EE00D51B9F /* Play */,
 				B175396D27C8A78C00D51B9F /* AppDelegate.swift */,
 				B175397627C8A78D00D51B9F /* Assets.xcassets */,
+				B109D06927D4816D00AD605F /* Demo.mov */,
 				B175397827C8A78D00D51B9F /* LaunchScreen.storyboard */,
 				B175397B27C8A78D00D51B9F /* Info.plist */,
 				B19A803827CDF92400A6BB6B /* MyPlayground.playground */,
@@ -340,6 +343,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B175397A27C8A78D00D51B9F /* LaunchScreen.storyboard in Resources */,
+				B109D06A27D4816D00AD605F /* Demo.mov in Resources */,
 				B175397727C8A78D00D51B9F /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
