@@ -6,3 +6,7 @@
 * 환경 요구사항: Swift 5, iOS Deployment Target: 10.0
 * 외부라이브러리: RxSwift 6.5, SnapKit, Then, Alamofire 5.5.0, Kingfisher 5.0.0, RxGesture 4.0.0
 * 개발일지 및 Demo 영상: https://rldd.tistory.com/318
+
+# 기능 요구 사항
+* 스플래시 스크린
+   * 제공되는 이미지 2초간 노출 후 음악 재생 화면으로 전환
