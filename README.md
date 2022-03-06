@@ -11,6 +11,3 @@
 <video src="https://blog.kakaocdn.net/dn/1vtyt/btru8VQx7Jz/yyNPTA2LZnBmFYCAPlgPn1/Demo.mov?attach=1&knm=tfile.mov" style="width: 30%;" autoplay loop muted playsinline></video>
 </p>
 
-<iframe id="video" width="가로" height="세로" src="https://blog.kakaocdn.net/dn/1vtyt/btru8VQx7Jz/yyNPTA2LZnBmFYCAPlgPn1/Demo.mov?attach=1&knm=tfile.mov"frameborder="0">
-</iframe>
-
